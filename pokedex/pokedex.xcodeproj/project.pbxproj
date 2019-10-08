@@ -10,11 +10,12 @@
 		336EA1C4234B87F8004ABB90 /* classOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336EA1C3234B87F8004ABB90 /* classOne.swift */; };
 		33DB7DE2234B6A46000EFC39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB7DE1234B6A46000EFC39 /* AppDelegate.swift */; };
 		33DB7DE4234B6A46000EFC39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB7DE3234B6A46000EFC39 /* ViewController.swift */; };
-		33DB7DE7234B6A46000EFC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33DB7DE5234B6A46000EFC39 /* Main.storyboard */; };
+		33DB7DE7234B6A46000EFC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33DB7DE5234B6A46000EFC39 /* Main.storyboard */; settings = {ASSET_TAGS = (interface, ); }; };
 		33DB7DE9234B6A47000EFC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33DB7DE8234B6A47000EFC39 /* Assets.xcassets */; };
 		33DB7DEC234B6A47000EFC39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33DB7DEA234B6A47000EFC39 /* LaunchScreen.storyboard */; };
 		33DB7DF7234B6A47000EFC39 /* pokedexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB7DF6234B6A47000EFC39 /* pokedexTests.swift */; };
 		33DB7E02234B6A47000EFC39 /* pokedexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB7E01234B6A47000EFC39 /* pokedexUITests.swift */; };
+		BF116F1F234B8C01006C477D /* classChildOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF116F1E234B8C01006C477D /* classChildOne.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		33DB7DFD234B6A47000EFC39 /* pokedexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokedexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DB7E01234B6A47000EFC39 /* pokedexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokedexUITests.swift; sourceTree = "<group>"; };
 		33DB7E03234B6A47000EFC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF116F1E234B8C01006C477D /* classChildOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classChildOne.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				336EA1C3234B87F8004ABB90 /* classOne.swift */,
+				BF116F1E234B8C01006C477D /* classChildOne.swift */,
 			);
 			path = pokeClasses;
 			sourceTree = "<group>";
@@ -198,6 +201,10 @@
 		33DB7DD6234B6A46000EFC39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					interface,
+					label,
+				);
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Guiock Anthony";
@@ -269,6 +276,7 @@
 			files = (
 				33DB7DE4234B6A46000EFC39 /* ViewController.swift in Sources */,
 				336EA1C4234B87F8004ABB90 /* classOne.swift in Sources */,
+				BF116F1F234B8C01006C477D /* classChildOne.swift in Sources */,
 				33DB7DE2234B6A46000EFC39 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
