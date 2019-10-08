@@ -15,11 +15,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        let hello : ClassOne = ClassOne();
-        print(hello.HelloConcat());
         let test : String = "ntm";
-        txtFld.text = test;
-        nameLbl.text = test;
+        var testArrayPkmn : Array<Pokemon> = [];
+        var pkmn : Pokemon;
+        var i : Int = 0;
+        while i < 10 {
+            i += 1;
+            pkmn = Pokemon(pkmnId : i, name: "test" + String(i));
+            testArrayPkmn.append(pkmn);
+        }
+        testArrayPkmn.shuffle();
+        testArrayPkmn = SortArray(pokemons: testArrayPkmn, sortType: "name", sortOrder: true)
+        for pokemon in testArrayPkmn {
+            print(pokemon.name);
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
         
     }
