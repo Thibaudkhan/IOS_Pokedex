@@ -4,3 +4,6 @@
 pokedex/pokedex\.xcodeproj/project\.xcworkspace/xcuserdata/rousselthibaud\.xcuserdatad/UserInterfaceState\.xcuserstate
 
 *.xcuserstate
+
+
+/pokedex/Pods/
