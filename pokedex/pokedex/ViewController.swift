@@ -16,63 +16,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var sortOrderBtn: UISegmentedControl!
     @IBOutlet weak var pokeList: UITableView!
     
+    var pokemons : Array<Pokemon> = PokemonAPI.GetPkmns();
     
-    let list : Array<String> = ["Milk", "Honey", "Bread", "Tacos", "Tomatoes", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos","Milk"]
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
- /*       let test : String = "ntm";
-        var testArrayPkmn : Array<Pokemon> = [];
-        var pkmn : Pokemon;
-        var i : Int = 0;
-        while i < 10 {
-            i += 1;
-            pkmn = Pokemon(pkmnId : i, name: "test" + String(i));
-            testArrayPkmn.append(pkmn);
-        }
-        testArrayPkmn.shuffle();
-        testArrayPkmn = SortArray(pokemons: testArrayPkmn, sortType: "name", sortOrder: true)
-        for pokemon in testArrayPkmn {
-            print(pokemon.name);
-        }
- */
-        var jsonContent : Data?;
-        var pokemons : Array<Pokemon> = [];
-      /* var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
-            if let JSON = response.result.value {
-                print(JSON)
-            }
-        }*/
-        
-        //Reception du JSon
-        let jsonParser = JsonParse.init();
-        let request : DataRequest = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json")
-        //Lecture Json
-        request.responseData {
-            response in
-            jsonContent = response.result.value;
-            pokemons = jsonParser.SerializeJson(jsonData: jsonContent);
-            
-            
-            pokemons.shuffle();
-            for pkmn in pokemons {
-                print(pkmn.name);
-            }
-            pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: true);
-            for pkmn in pokemons {
-                print(pkmn.name);
-            }
-            //isJsonRecieved = true;
-        }
-        
-
-        
-        
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,12 +28,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(list.count)
+        return(pokemons.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = list[indexPath.row]
+        let cellid = "cell"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as? TableViewCell else {
+            fatalError("mdr")
+        }
+        
+        let currentPokemon = pokemons[indexPath.row];
+        
+        cell.pokeName.text = currentPokemon.name;
+        cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
+        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        //cell.text = list[indexPath.row]
         return cell
     }
     

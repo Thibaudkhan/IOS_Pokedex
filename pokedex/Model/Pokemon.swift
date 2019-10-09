@@ -37,6 +37,7 @@ class Pokemon {
         self.description = description;
     }
     
+    
    /* func SetType (type : String){
         switch type {
             case "steel":
