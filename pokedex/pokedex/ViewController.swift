@@ -7,13 +7,18 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+import AlamofireImage
 
-class ViewController: UIViewController {
-    @IBOutlet weak var txtFld: UITextField!
-    @IBOutlet weak var nameLbl: UILabel!
+//import SwiftyJSON
+
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var sortAlphaBtn: UISegmentedControl!
+    @IBOutlet weak var sortOrderBtn: UISegmentedControl!
+    @IBOutlet weak var pokeList: UITableView!
     
-    @IBOutlet weak var submitBtn: UIButton!
+    
+    let list : Array<String> = ["Milk", "Honey", "Bread", "Tacos", "Tomatoes", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos", "Tacos","Milk"]
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -33,11 +38,11 @@ class ViewController: UIViewController {
         }
  */
        
-       var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
+       /*var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
             if let JSON = response.result.value {
                 print(JSON)
             }
-        }
+        }*/
         
         
 
@@ -47,6 +52,20 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return(list.count)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = list[indexPath.row]
+        return cell
     }
     
     /*@IBAction func displayMessage(sender: UIButton){
