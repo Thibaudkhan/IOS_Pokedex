@@ -20,12 +20,18 @@ class JsonParse {
         do{
             pokemons = try JSONSerialization.jsonObject(with: jsonData!) as! [[String : Any]];
             for pokemon in pokemons {
-                var pkmn : Pokemon = Pokemon.init();
-                pkmn.pkmnId = pokemon["national_id"] as! Int;
-                pkmn.description = pokemon["description"] as! String;
-                pkmn.name = pokemon["name"] as! String;
+                let pkmn : Pokemon = Pokemon.init(
+                    jsonId: pokemon["_id"] as! String,
+                    pkmnId: pokemon["national_id"] as! Int,
+                    name: pokemon["name"] as! String,
+                    img_url: pokemon["image_url"] as! String,
+                    //evol: ,
+                    description: pokemon["description"] as! String)
+                //pkmn.pkmnId = pokemon["national_id"] as! Int;
+                //pkmn.description = pokemon["description"] as! String;
+                //pkmn.name = pokemon["name"] as! String;
                 for type in pokemon["types"] as! Array<String>{
-                    pkmn.types.append(type);
+                    //pkmn.SetType(type: type);
                 }
                 returnedArray.append(pkmn);
                 //print(pokemon["evolutions"]);
