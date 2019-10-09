@@ -6,6 +6,8 @@
 
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
     @IBOutlet weak var txtFld: UITextField!
@@ -15,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        let test : String = "ntm";
+ /*       let test : String = "ntm";
         var testArrayPkmn : Array<Pokemon> = [];
         var pkmn : Pokemon;
         var i : Int = 0;
@@ -29,6 +31,19 @@ class ViewController: UIViewController {
         for pokemon in testArrayPkmn {
             print(pokemon.name);
         }
+ */
+       
+       var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
+            if let JSON = response.result.value {
+                print(JSON)
+            }
+        }
+        
+        
+
+        
+        
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         
