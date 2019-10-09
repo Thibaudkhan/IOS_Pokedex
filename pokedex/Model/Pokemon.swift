@@ -10,14 +10,16 @@ import Foundation
 
 class Pokemon {
     
-    init(pkmnId : Int, name : String) {
-        self.pkmnId = pkmnId;
-        self.name = name;
+    init() {
     }
     
     var jsonId : String = "";
     var pkmnId : Int = 0;
     var name : String = "";
+    var types : Array<String> = [];
+    var img_url : String = "";
+    var evol : [String:Any] = [:];
+    var description : String = "";
     
 }
 

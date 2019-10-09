@@ -32,13 +32,26 @@ class ViewController: UIViewController {
             print(pokemon.name);
         }
  */
-       
-       var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
+        var jsonContent : Data?;
+        var pokemons : Array<Pokemon> = [];
+        var isJsonRecieved : Bool = false;
+      /* var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
             if let JSON = response.result.value {
                 print(JSON)
             }
-        }
+        }*/
+        let jsonParser = JsonParse.init();
+        let request : DataRequest = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json")
         
+        request.responseData {
+            response in
+            jsonContent = response.result.value;
+            pokemons = jsonParser.SerializeJson(jsonData: jsonContent);
+            for pkmn in pokemons {
+                print(pkmn.types);
+            }
+            //isJsonRecieved = true;
+        }
         
 
         
