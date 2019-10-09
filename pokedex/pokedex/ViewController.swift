@@ -37,13 +37,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print(pokemon.name);
         }
  */
-       
-       /*var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
+        var jsonContent : Data?;
+        var pokemons : Array<Pokemon> = [];
+      /* var pokemon = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json").responseString { response in
             if let JSON = response.result.value {
                 print(JSON)
             }
         }*/
         
+        //Reception du JSon
+        let jsonParser = JsonParse.init();
+        let request : DataRequest = Alamofire.request("https://trello-attachments.s3.amazonaws.com/5cc6b739765c887379627adc/5d9a165fc8efec7a2bfa8a65/x/e47275cb0fd8895e24c206860216b1c4/pokemon.json")
+        //Lecture Json
+        request.responseData {
+            response in
+            jsonContent = response.result.value;
+            pokemons = jsonParser.SerializeJson(jsonData: jsonContent);
+            
+            
+            pokemons.shuffle();
+            for pkmn in pokemons {
+                print(pkmn.name);
+            }
+            pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: true);
+            for pkmn in pokemons {
+                print(pkmn.name);
+            }
+            //isJsonRecieved = true;
+        }
         
 
         
