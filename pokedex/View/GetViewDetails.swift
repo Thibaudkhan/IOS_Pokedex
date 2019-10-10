@@ -34,6 +34,7 @@ class GetViewDetails: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
+      // pokDetId.text = viewController
 
         //pokDetId.text = viewController.GetPokIndex() //viewController.GetPokIndex();
         //pokTableId.reloadData()

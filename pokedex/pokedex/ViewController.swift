@@ -44,6 +44,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as? TableViewCell else {
             fatalError("mdr")
         }
+
+        let pokemonViewModel = TableViewCellModel(cellIndex: indexPath.row, pokeName: currentPokemon.name, pokeId: currentPokemon.pkmnId, pokeImage: currentPokemon.img_url);
         currentPokemon = pokemons[indexPath.row];
         print("pkmn ant aa : ")
         print(self.currentPokemon?.pkmnId);
@@ -64,39 +66,54 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }*/
     
     
-    
-    @IBAction func sortAlpha(_ sender: Any) {
-        let getIndex = sortAlphaBtn.selectedSegmentIndex;
-       
-        print(getIndex)
-        
-        if getIndex == 0{
-             pokemons = SortArray(pokemons : pokemons, sortType : "id", sortOrder : true)
-            
-        }else{
-             pokemons = SortArray(pokemons : pokemons, sortType : "id", sortOrder : false)
-        }
-        
-        pokeList.reloadData()
-        
-        
-    }
-    
-    
     @IBAction func sortOrder(_ sender: Any) {
-        let getIndex = sortOrderBtn.selectedSegmentIndex;
-        
-        print(getIndex)
-        
-        if getIndex == 0{
-            pokemons = SortArray(pokemons : pokemons, sortType : "name", sortOrder : true)
+        let getOrder = sortOrderBtn.selectedSegmentIndex;
+        let getAlpha = sortAlphaBtn.selectedSegmentIndex;
+ 
+        if(getAlpha == 0){
+            if(getOrder == 0){
+                pokemons = SortArray(pokemons: pokemons, sortType: "id", sortOrder: true);
+            }else{
+                pokemons = SortArray(pokemons: pokemons, sortType: "id", sortOrder: false);
+            }
             
         }else{
-            pokemons = SortArray(pokemons : pokemons, sortType : "name", sortOrder : false)
+            if(getOrder == 0){
+                pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: true);
+            }else{
+                pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: false);
+            }
         }
+        
         pokeList.reloadData()
+        
+        
     }
     
+    
+  @IBAction func sortAlpha(_ sender: Any) {
+    let getOrder = sortOrderBtn.selectedSegmentIndex;
+    let getAlpha = sortAlphaBtn.selectedSegmentIndex;
+    
+    if(getAlpha == 0){
+        if(getOrder == 0){
+            pokemons = SortArray(pokemons: pokemons, sortType: "id", sortOrder: true);
+        }else{
+            pokemons = SortArray(pokemons: pokemons, sortType: "id", sortOrder: false);
+        }
+        
+    }else{
+        if(getOrder == 0){
+            pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: true);
+        }else{
+            pokemons = SortArray(pokemons: pokemons, sortType: "name", sortOrder: false);
+        }
+    }
+    
+    pokeList.reloadData()
+    }
+    
+   
     
     // Lier page 1 à detail
     

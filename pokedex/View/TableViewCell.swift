@@ -17,16 +17,30 @@ class TableViewCell: UITableViewCell
     @IBOutlet weak var pokeImage: UIImageView!
     
     //var viewController = ViewController()
-    var tabPok : [TableViewCellModel] = []
+    //var tabPok : [TableViewCellModel] = []
     
     var cellIndex : Int = 0
-    var viewModel : TableViewCellModel?
-    {
+    
+    var viewModel: TableViewCellModel? {
         didSet {
-            cellIndex = viewModel!.cellIndex
-            pokeName.text = viewModel?.pokeName
-            pokeId.text = viewModel?.pokeId
-            //pokeImage?.image //= viewModel!.pokeImage
+            guard let viewModel = viewModel else {
+                return
+            }
+            
+            cellIndex = viewModel.cellIndex
+            pokeName.text = viewModel.pokeName
+            pokeId.text = viewModel.pokeId
+            
+            ImageDownloader.download(imageURLString: viewModel.pokeImage) { [weak self] result in
+                if self?.cellIndex == viewModel.cellIndex {
+                    switch result {
+                    case .success(let image) :
+                        self?.pokeImage.image = image
+                    case .failure:
+                        self?.pokeImage.image = UIImage(named: "Gyarados")
+                    }
+                }
+            }
         }
     }
     
@@ -37,17 +51,10 @@ class TableViewCell: UITableViewCell
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let url = URL(string: "../pokedex/gyarados")
+        //let url = URL(string: "../pokedex/gyarados")
+        pokeImage.image = nil
         pokeName.text = nil
         pokeId.text = nil
-        Alamofire.request(url!, method: .get).responseImage { response in
-            guard let urlImage = response.result.value else {
-                // Handle error
-                return
-            }
-            self.pokeImage?.image = urlImage// Do stuff with your image
-        }
-        //pokeImage.text = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
