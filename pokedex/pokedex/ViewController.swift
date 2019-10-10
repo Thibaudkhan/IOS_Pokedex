@@ -30,6 +30,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return(pokemons.count)
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellid = "cell"
@@ -45,6 +48,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //cell.text = list[indexPath.row]
         return cell
     }
+    
+    
+    @IBAction func sortAlpha(_ sender: Any) {
+        let getIndex = sortAlphaBtn.selectedSegmentIndex;
+       
+        print(getIndex)
+        
+        if getIndex == 0{
+             pokemons = SortArray(pokemons : pokemons, sortType : "id", sortOrder : true)
+            
+        }else{
+             pokemons = SortArray(pokemons : pokemons, sortType : "id", sortOrder : false)
+        }
+        
+        pokeList.reloadData()
+        
+        
+    }
+    
+    
+    @IBAction func sortOrder(_ sender: Any) {
+        let getIndex = sortOrderBtn.selectedSegmentIndex;
+        
+        print(getIndex)
+        
+        if getIndex == 0{
+            pokemons = SortArray(pokemons : pokemons, sortType : "name", sortOrder : true)
+            
+        }else{
+            pokemons = SortArray(pokemons : pokemons, sortType : "name", sortOrder : false)
+        }
+        pokeList.reloadData()
+    }
+    
     
     /*@IBAction func displayMessage(sender: UIButton){
         
