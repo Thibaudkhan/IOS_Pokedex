@@ -43,7 +43,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             fatalError("mdr")
         }
         let currentPokemon = pokemons[indexPath.row];
+
+        let pokemonViewModel = TableViewCellModel(cellIndex: indexPath.row, pokeName: currentPokemon.name, pokeId: currentPokemon.pkmnId, pokeImage: currentPokemon.img_url);
         
+        (cell as TableViewCell).viewModel = pokemonViewModel;
+        
+        
+//        cell.pokeName.text = currentPokemon.name;
+//        cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
+//        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        
+
         
         cell.pokeName.text = currentPokemon.name;
         cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
