@@ -15,8 +15,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var sortAlphaBtn: UISegmentedControl!
     @IBOutlet weak var sortOrderBtn: UISegmentedControl!
     @IBOutlet weak var pokeList: UITableView!
-    
+    let tab = ["efef","feffe","ndfdl"];
     var pokemons : Array<Pokemon> = PokemonAPI.GetPkmns();
+    
+    
+    let cellid : String = "cell"
     
     
     override func viewDidLoad() {
@@ -35,19 +38,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellid = "cell"
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as? TableViewCell else {
             fatalError("mdr")
         }
-        
         let currentPokemon = pokemons[indexPath.row];
+        
         
         cell.pokeName.text = currentPokemon.name;
         cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
         cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        print("type currentPoke : ")
+        print(type(of: currentPokemon))
         //cell.text = list[indexPath.row]
         return cell
     }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> Pokemon  {
+        let currentPokemon = pokemons[indexPath.row];
+        
+        return currentPokemon;
+    }
+    
     
     
     @IBAction func sortAlpha(_ sender: Any) {
@@ -80,6 +92,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             pokemons = SortArray(pokemons : pokemons, sortType : "name", sortOrder : false)
         }
         pokeList.reloadData()
+    }
+    
+    
+    // Lier page 1 à detail
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)-> Int {
+        let currentPokemon = pokemons[indexPath.row];
+        
+        var pokIndex = currentPokemon.pkmnId;
+        performSegue(withIdentifier: "segue", sender: self)
+        print(pokIndex);
+
+        return pokIndex;
     }
     
     
