@@ -17,13 +17,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var pokeList: UITableView!
     let tab = ["efef","feffe","ndfdl"];
     var pokemons : Array<Pokemon> = PokemonAPI.GetPkmns();
-    
-    
+    var pokIndex : Int = 5;
+    var currentPokemon : Pokemon?;
+    var idDetail : Int = 5;
     let cellid : String = "cell"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -42,23 +44,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as? TableViewCell else {
             fatalError("mdr")
         }
-        let currentPokemon = pokemons[indexPath.row];
+        currentPokemon = pokemons[indexPath.row];
+        print("pkmn ant aa : ")
+        print(self.currentPokemon?.pkmnId);
         
-        
-        cell.pokeName.text = currentPokemon.name;
-        cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
-        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        cell.pokeName.text = currentPokemon?.name;
+        cell.pokeId.text = "#" + String(currentPokemon!.pkmnId);
+        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon!.img_url)!);
         print("type currentPoke : ")
         print(type(of: currentPokemon))
         //cell.text = list[indexPath.row]
         return cell
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> Pokemon  {
-        let currentPokemon = pokemons[indexPath.row];
+   /* public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> Pokemon  {
+        currentPokemon = pokemons[indexPath.row];
         
-        return currentPokemon;
-    }
+        return currentPokemon! ;
+    }*/
     
     
     
@@ -97,17 +100,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Lier page 1 à detail
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)-> Int {
-        let currentPokemon = pokemons[indexPath.row];
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("ntm")
         
-        var pokIndex = currentPokemon.pkmnId;
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.currentPokemon = pokemons[indexPath.row];
+        
+        pokIndex = self.currentPokemon!.pkmnId;
         performSegue(withIdentifier: "segue", sender: self)
-        print(pokIndex);
-
-        return pokIndex;
+        GetPokIndex()
+        //print(pokIndex);
+        //print("le ppokIndex "+String(self.pokIndex));
+        //return pokIndex;
     }
-    
-    
+
+    func GetPokIndex()-> String{
+        print(pokIndex);
+        print("le ppokIndex "+String(self.pokIndex));
+            //self.currentPokemon!.pkmnId = 1
+         //idDetail = self.currentPokemon?.pkmnId ?? 1
+        //idDetail = self.currentPokemon!.pkmnId
+        return String(self.idDetail)
+    }
     /*@IBAction func displayMessage(sender: UIButton){
         
         // use let to define a constant String variable.
