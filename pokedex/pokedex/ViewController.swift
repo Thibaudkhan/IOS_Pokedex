@@ -42,9 +42,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let currentPokemon = pokemons[indexPath.row];
         
-        cell.pokeName.text = currentPokemon.name;
-        cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
-        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        let pokemonViewModel = TableViewCellModel(cellIndex: indexPath.row, pokeName: currentPokemon.name, pokeId: currentPokemon.pkmnId, pokeImage: currentPokemon.img_url);
+        
+        (cell as TableViewCell).viewModel = pokemonViewModel;
+        
+        
+//        cell.pokeName.text = currentPokemon.name;
+//        cell.pokeId.text = "#" + String(currentPokemon.pkmnId);
+//        cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon.img_url)!);
+        
+
         //cell.text = list[indexPath.row]
         return cell
     }

@@ -15,10 +15,10 @@ struct TableViewCellModel {
     let pokeId : String;
     let pokeImage : String;
     
-    init(cellIndex : Int, pokeName : String, pokeId : String, pokeImage : String) {
+    init(cellIndex : Int, pokeName : String, pokeId : Int, pokeImage : String) {
         self.cellIndex = cellIndex;
         self.pokeName = pokeName;
-        self.pokeId = pokeId;
+        self.pokeId = "#\(pokeId)";
         self.pokeImage = pokeImage;
     }
     

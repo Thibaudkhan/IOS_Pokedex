@@ -22,7 +22,7 @@ class JsonParse {
             for pokemon in pokemons {
                 let pkmn : Pokemon = Pokemon.init(
                     jsonId: pokemon["_id"] as! String,
-                    pkmnId: pokemon["national_id"] as! Int,
+                    pkmnId: pokemon["pkdx_id"] as! Int,
                     name: pokemon["name"] as! String,
                     img_url: pokemon["image_url"] as! String,
                     //evol: ,
@@ -30,9 +30,9 @@ class JsonParse {
                 //pkmn.pkmnId = pokemon["national_id"] as! Int;
                 //pkmn.description = pokemon["description"] as! String;
                 //pkmn.name = pokemon["name"] as! String;
-                for type in pokemon["types"] as! Array<String>{
-                    //pkmn.SetType(type: type);
-                }
+//                for type in pokemon["types"] as! Array<String>{
+//                    pkmn.SetType(type: type);
+//                }
                 returnedArray.append(pkmn);
                 //print(pokemon["evolutions"]);
             }
