@@ -17,7 +17,7 @@ class GetViewDetails: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // pokDetId.text =
+      // pokDetId.text = viewController
 
         //let test = viewController.tableView(<#T##tableView: UITableView##UITableView#>, didSelectRowAt: IndexPath(index: 1))
         //pokDetId.text = String(test)

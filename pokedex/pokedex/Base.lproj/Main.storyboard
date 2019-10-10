@@ -26,8 +26,8 @@
                                         <rect key="frame" x="18" y="34" width="121" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
-                                            <segment title="First"/>
-                                            <segment title="Second"/>
+                                            <segment title="ID"/>
+                                            <segment title="Alpha"/>
                                         </segments>
                                         <connections>
                                             <action selector="sortAlpha:" destination="BYZ-38-t0r" eventType="valueChanged" id="wDN-AP-jtI"/>
