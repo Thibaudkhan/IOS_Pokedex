@@ -10,40 +10,35 @@ import UIKit
 import Alamofire
 
 
+import UIKit
+
 class GetViewDetails: UIViewController {
+    @IBOutlet weak var pokDetImg: UIImageView!
+    @IBOutlet weak var pokDetDesc: UILabel!
     //@IBOutlet weak var pokTableLbl: UILabel!
-    
+    @IBOutlet weak var pokDetName: UILabel!
     @IBOutlet weak var pokDetId: UILabel!
     
-    var pokemons : Array<Pokemon> = PokemonAPI.GetPkmns();
+    // var theIndex2 = Int()
+    var theName = String()
+    var theDesc = String()
+    var theId = Int()
+    var theImg = UIImage()
     
-    var theIndex : String = "" ;
-    
-    var viewController = ViewController?.self {
-        didSet{
-            pokDetId.text = ViewController().GetPokIndex()
-            print(ViewController().GetPokIndex())
-        }
-        /*willSet(viewController.GetPokIndex()){
-        
-        
-        }*/
-        
-    }
-    
-  
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-      // pokDetId.text = viewController
-
-        //pokDetId.text = viewController.GetPokIndex() //viewController.GetPokIndex();
-        //pokTableId.reloadData()
-        //var test = viewController.tableView(, didSelectRowAt: IndexPath(index: 1))
-        //pokDetId.text = String(test)
-        //var test = viewController.pokIndex;
- 
-        // Do any additional setup after loading the view.
+        print("More Details")
+        print(theName)
+        pokDetId.text = "# "+String(theId)
+        pokDetName.text = theName
+        pokDetDesc.text = theDesc
+        //pokDetImg.image = theImg
     }
     
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
 }

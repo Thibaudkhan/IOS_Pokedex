@@ -12,15 +12,20 @@ import AlamofireImage
 //import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    //@IBOutlet weak var colorChangedBtn: UISegmentedControl!
+    @IBOutlet var viewContainer: UIView!
     @IBOutlet weak var sortAlphaBtn: UISegmentedControl!
     @IBOutlet weak var sortOrderBtn: UISegmentedControl!
+    
     @IBOutlet weak var pokeList: UITableView!
     let tab = ["efef","feffe","ndfdl"];
     var pokemons : Array<Pokemon> = PokemonAPI.GetPkmns();
     var pokIndex : Int = 5;
     var currentPokemon : Pokemon?;
     var idDetail : Int = 5;
-    let cellid : String = "cell"
+    let cellid : String = "TableViewCell"
+    var testIm = UIImage();
     
     
     override func viewDidLoad() {
@@ -45,7 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             fatalError("mdr")
         }
 
-        let pokemonViewModel = TableViewCellModel(cellIndex: indexPath.row, pokeName: currentPokemon.name, pokeId: currentPokemon.pkmnId, pokeImage: currentPokemon.img_url);
+        //let pokemonViewModel = TableViewCellModel(cellIndex: indexPath.row, pokeName: currentPokemon!.name, pokeId: currentPokemon!.pkmnId, pokeImage: currentPokemon!.img_url);
         currentPokemon = pokemons[indexPath.row];
         print("pkmn ant aa : ")
         print(self.currentPokemon?.pkmnId);
@@ -53,6 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.pokeName.text = currentPokemon?.name;
         cell.pokeId.text = "#" + String(currentPokemon!.pkmnId);
         cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon!.img_url)!);
+        //testIm = cell.pokeImage.af_setImage(withURL: URL(string: currentPokemon!.img_url)!);
         print("type currentPoke : ")
         print(type(of: currentPokemon))
         //cell.text = list[indexPath.row]
@@ -113,62 +119,50 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     pokeList.reloadData()
     }
     
-   
+    
+   //Changer la couleur background
+    
+    
+    
+    /*@IBAction func SwitchColor(_ sender: UISegmentedControl) {
+        let color = colorChangedBtn.selectedSegmentIndex;
+        if color == 0{
+            viewContainer.backgroundColor = UIColor.red
+        }
+        if color == 1{
+            viewContainer.backgroundColor = UIColor.black
+            //colorChangedTable.backgroundColor = UIColor.black
+        }
+    
+    }*/
     
     // Lier page 1 à detail
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("ntm")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.currentPokemon = pokemons[indexPath.row];
+        let instantSb = storyboard.instantiateViewController(withIdentifier: "GetViewDetails") as! GetViewDetails
+        //var test =  ImageDownloader.download(imageURLString: "http://assets22.pokemon.com/assets/cms2/img/pokedex/full/001.png")
+        //var test = ImageDownloader.download(withURL: (String: currentPokemon!.img_url));
+        instantSb.theName = pokemons[indexPath.row].name;
+        instantSb.theId = pokemons[indexPath.row].pkmnId;
+        instantSb.theDesc = pokemons[indexPath.row].description;
+        //instantSb.theImage = test
         
-        pokIndex = self.currentPokemon!.pkmnId;
-        performSegue(withIdentifier: "segue", sender: self)
-        GetPokIndex()
-        //print(pokIndex);
-        //print("le ppokIndex "+String(self.pokIndex));
-        //return pokIndex;
+        //instantSb.theImage = self.pokeImage.af_setImage(withURL: URL(string: currentPokemon!.img_url)!);
+        // print("Au click "+String(instantSb.theName));
+        // pokIndex = self.currentPokemon!.pkmnId;
+        // splitViewController?.showDetailViewController(instantSb, sender: nil)
+        self.navigationController?.pushViewController(instantSb, animated: true)
     }
 
-    func GetPokIndex()-> String{
+    /*func GetPokIndex()-> String{
         print(pokIndex);
         print("le ppokIndex "+String(self.pokIndex));
             //self.currentPokemon!.pkmnId = 1
          //idDetail = self.currentPokemon?.pkmnId ?? 1
         //idDetail = self.currentPokemon!.pkmnId
         return String(self.idDetail)
-    }
-    /*@IBAction func displayMessage(sender: UIButton){
-        
-        // use let to define a constant String variable.
-        
-        // Get sender button label text.
-        
-        let buttonLabel : String = (sender.titleLabel?.text)!
-        
-        // Create alert title and message body.
-        
-        let alertTitle : String = "Hello " + buttonLabel
-        
-        let alertMessage : String = "Biatch."
-        
-        // Create a UIAlertController object.
-        
-        let alertController : UIAlertController = UIAlertController(title: alertTitle, message : alertMessage, preferredStyle : UIAlertController.Style.alert)
-        
-        // Create a UIAlertAction object.
-        
-        let alertAction : UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
-        
-        // Add alertAction to alertController.
-        
-        alertController.addAction(alertAction);
-        
-        // Present the popup alert dialog.
-        
-        present(alertController, animated: true, completion: nil)
-        
     }*/
     
 }
